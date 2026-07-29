@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SmartCash - Dashboard financeiro para controle de receitas e despesas."
+    />
+    <title>SmartCash | Dashboard Financeiro</title>
+
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo-wrapper">
+          <h1 class="logo">SmartCash</h1>
+
+          <p class="logo-subtitle">Dashboard Financeiro Pessoal</p>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <section class="summary-section" aria-label="Resumo financeiro">
+          <article class="summary-card income-card">
+            <div class="card-header">
+              <h2 class="card-title">Entradas</h2>
+
+              <span class="card-icon"> ↑ </span>
+            </div>
+
+            <p class="card-value" id="income-display">R$ 0,00</p>
+          </article>
+
+          <article class="summary-card expense-card">
+            <div class="card-header">
+              <h2 class="card-title">Saídas</h2>
+
+              <span class="card-icon"> ↓ </span>
+            </div>
+
+            <p class="card-value" id="expense-display">R$ 0,00</p>
+          </article>
+
+          <article class="summary-card balance-card">
+            <div class="card-header">
+              <h2 class="card-title">Saldo Total</h2>
+
+              <span class="card-icon"> $ </span>
+            </div>
+
+            <p class="card-value" id="balance-display">R$ 0,00</p>
+          </article>
+        </section>
+
+        <section class="dashboard-content">
+          <section class="form-section" aria-label="Cadastro de transações">
+            <div class="section-header">
+              <h2 class="section-title">Nova Transação</h2>
+
+              <p class="section-description">
+                Adicione uma nova receita ou despesa
+              </p>
+            </div>
+
+            <form id="transaction-form" class="transaction-form">
+              <div class="form-group">
+                <label for="transaction-name"> Descrição </label>
+
+                <input
+                  type="text"
+                  id="transaction-name"
+                  name="transaction-name"
+                  placeholder="Ex: Pagamento, refeição ..."
+                  autocomplete="off"
+                />
+                <div id="form-message" class="form-message"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="transaction-amount"> Valor </label>
+
+                <input
+                  type="number"
+                  id="transaction-amount"
+                  name="transaction-amount"
+                  step="0.01"
+                  placeholder="Ex: 10 ou -10 (use - para saídas)"
+                />
+              </div>
+
+              <button type="submit" class="submit-button">
+                Adicionar Transação
+              </button>
+            </form>
+          </section>
+
+          <section
+            class="transactions-section"
+            aria-label="Histórico de transações"
+          >
+            <div class="section-header">
+              <h2 class="section-title">Extrato Financeiro</h2>
+
+              <p class="section-description">
+                Histórico completo de movimentações
+              </p>
+            </div>
+
+            <ul id="transaction-list" class="transaction-list">
+              <li class="empty-state">Nenhuma transação cadastrada.</li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-text">
+          SmartCash © 2026 - Dashboard Financeiro • Desenvolvido por: Isaias
+          Silva
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
