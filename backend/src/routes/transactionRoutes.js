@@ -8,6 +8,10 @@ const {
   deleteTransaction,
 } = require("../controllers/transactionController");
 
+const authMiddleware = require("../middlewares/authMiddleware");
+
+router.use(authMiddleware);
+
 router.get("/", getAllTransactions);
 
 router.post("/", createTransaction);
