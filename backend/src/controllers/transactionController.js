@@ -3,6 +3,9 @@ const { Transaction } = require("../../models");
 async function getAllTransactions(req, res, next) {
   try {
     const transactions = await Transaction.findAll({
+      where: {
+        userId: req.user.id,
+      },
       order: [["createdAt", "DESC"]],
     });
 
@@ -30,7 +33,7 @@ async function createTransaction(req, res, next) {
     const newTransaction = await Transaction.create({
       description,
       amount,
-      userId: 1,
+      userId: req.user.id,
     });
 
     return res.status(201).json(newTransaction);
@@ -56,7 +59,12 @@ async function updateTransaction(req, res, next) {
       });
     }
 
-    const transaction = await Transaction.findByPk(transactionId);
+    const transaction = await Transaction.findOne({
+      where: {
+        id: transactionId,
+        userId: req.user.id,
+      },
+    });
 
     if (!transaction) {
       return res.status(404).json({
@@ -79,7 +87,12 @@ async function deleteTransaction(req, res, next) {
   try {
     const transactionId = Number(req.params.id);
 
-    const transaction = await Transaction.findByPk(transactionId);
+    const transaction = await Transaction.findOne({
+      where: {
+        id: transactionId,
+        userId: req.user.id,
+      },
+    });
 
     if (!transaction) {
       return res.status(404).json({
