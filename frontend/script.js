@@ -96,14 +96,24 @@ async function addTransaction(transaction) {
   }
 }
 
-function removeTransaction(transactionId) {
-  transactions = transactions.filter(
-    (transaction) => transaction.id !== transactionId,
-  );
+async function removeTransaction(transactionId) {
+  try {
+    await apiRequest(`/transactions/${transactionId}`, {
+      method: "DELETE",
+    });
 
-  saveTransactions();
+    transactions = transactions.filter(
+      (transaction) => transaction.id !== transactionId,
+    );
 
-  updateUI();
+    updateUI();
+
+    showFormMessage("Transação removida com sucesso.", "success");
+  } catch (error) {
+    console.error(error);
+
+    showFormMessage("Erro ao remover transação.", "error");
+  }
 }
 
 function calculateIncome() {
@@ -125,10 +135,6 @@ function calculateBalance() {
   );
 }
 
-function saveTransactions() {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(transactions));
-}
-
 async function loadTransactions() {
   try {
     const data = await apiRequest("/transactions");
@@ -147,8 +153,12 @@ async function loadTransactions() {
   }
 }
 
-function initializeApplication() {
-  loadTransactions();
+async function initializeApplication() {
+  if (!isAuthenticated()) {
+    return;
+  }
+
+  await loadTransactions();
 }
 
 function createTransactionElement(transaction) {
