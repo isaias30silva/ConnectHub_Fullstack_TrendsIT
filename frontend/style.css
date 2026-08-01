@@ -390,6 +390,29 @@ body {
   color: var(--expense-color);
 }
 
+.edit-button {
+  background-color: transparent;
+
+  border: none;
+
+  color: var(--primary-color);
+
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  margin-left: 1rem;
+
+  transition: transform 0.3s ease;
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+
+  opacity: 0.8;
+}
+
 .delete-button {
   background-color: transparent;
 

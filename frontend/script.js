@@ -6,8 +6,13 @@ const transactionList = document.querySelector("#transaction-list");
 const incomeDisplay = document.querySelector("#income-display");
 const expenseDisplay = document.querySelector("#expense-display");
 const balanceDisplay = document.querySelector("#balance-display");
+const transactionSubmitButton = document.querySelector(
+  "#transaction-submit-button",
+);
 
 let transactions = [];
+
+let editingTransactionId = null;
 
 function convertAmountToNumber(value) {
   return Number(value);
@@ -186,6 +191,14 @@ function createTransactionElement(transaction) {
             </span>
 
             <button
+ class="edit-button"
+ data-id="${transaction.id}"
+ aria-label="Editar transação"
+>
+✏️
+</button>
+
+            <button
                 class="delete-button"
                 data-id="${transaction.id}"
                 aria-label="Remover transação"
@@ -282,9 +295,73 @@ function clearFormInputs() {
 
   transactionAmountInput.value = "";
 
+  editingTransactionId = null;
+
+  transactionSubmitButton.textContent =
+  "Adicionar Transação";
+
   clearInputErrors();
 
   transactionNameInput.focus();
+}
+
+function editTransaction(transactionId) {
+  const transaction = transactions.find(
+    (transaction) => transaction.id === transactionId,
+  );
+
+  if (!transaction) {
+    return;
+  }
+
+  transactionNameInput.value = transaction.name;
+
+  transactionAmountInput.value = transaction.amount;
+
+  editingTransactionId = transactionId;
+
+  transactionSubmitButton.textContent = "Salvar Alteração";
+
+  showFormMessage("Editando transação.", "success");
+
+  transactionNameInput.focus();
+}
+
+async function updateTransaction(transactionId, transactionData) {
+  try {
+    const updatedTransaction = await apiRequest(
+      `/transactions/${transactionId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          description: transactionData.name,
+          amount: transactionData.amount,
+        }),
+      },
+    );
+
+    transactions = transactions.map((transaction) => {
+      if (transaction.id === transactionId) {
+        return {
+          id: updatedTransaction.id,
+          name: updatedTransaction.description,
+          amount: Number(updatedTransaction.amount),
+        };
+      }
+
+      return transaction;
+    });
+
+    updateUI();
+
+    return true;
+  } catch (error) {
+    console.error(error);
+
+    showFormMessage("Erro ao atualizar transação.", "error");
+
+    return false;
+  }
 }
 
 async function handleFormSubmit(event) {
@@ -300,15 +377,32 @@ async function handleFormSubmit(event) {
     return;
   }
 
-  const newTransaction = createTransaction(transactionName, transactionAmount);
+  let success;
 
-  const success = await addTransaction(newTransaction);
+  if (editingTransactionId) {
+    success = await updateTransaction(editingTransactionId, {
+      name: transactionName,
+      amount: transactionAmount,
+    });
+
+    editingTransactionId = null;
+
+    transactionSubmitButton.textContent =
+  "Adicionar Transação";
+  } else {
+    const newTransaction = createTransaction(
+      transactionName,
+      transactionAmount,
+    );
+
+    success = await addTransaction(newTransaction);
+  }
 
   if (!success) {
     return;
   }
 
-  showFormMessage("Transação adicionada com sucesso.", "success");
+  showFormMessage("Transação salva com sucesso.", "success");
 
   clearFormInputs();
 }
@@ -316,13 +410,21 @@ async function handleFormSubmit(event) {
 transactionList.addEventListener("click", (event) => {
   const deleteButton = event.target.closest(".delete-button");
 
-  if (!deleteButton) {
+  const editButton = event.target.closest(".edit-button");
+
+  if (deleteButton) {
+    const transactionId = Number(deleteButton.dataset.id);
+
+    removeTransaction(transactionId);
+
     return;
   }
 
-  const transactionId = Number(deleteButton.dataset.id);
+  if (editButton) {
+    const transactionId = Number(editButton.dataset.id);
 
-  removeTransaction(transactionId);
+    editTransaction(transactionId);
+  }
 });
 
 transactionNameInput.addEventListener("input", () => {
