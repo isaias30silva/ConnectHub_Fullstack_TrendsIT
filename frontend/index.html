@@ -34,95 +34,134 @@
     </header>
     <main class="main">
       <div class="container">
-        <section class="summary-section" aria-label="Resumo financeiro">
-          <article class="summary-card income-card">
-            <div class="card-header">
-              <h2 class="card-title">Entradas</h2>
+        <!-- LOGIN -->
+        <section id="login-section">
+          <div class="login-card">
+            <h2>Entrar no ConnectHub</h2>
 
-              <span class="card-icon"> ↑ </span>
-            </div>
+            <form id="login-form">
+              <div class="form-group">
+                <label for="login-email">E-mail</label>
 
-            <p class="card-value" id="income-display">R$ 0,00</p>
-          </article>
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="Digite seu e-mail"
+                  required
+                />
+              </div>
 
-          <article class="summary-card expense-card">
-            <div class="card-header">
-              <h2 class="card-title">Saídas</h2>
+              <div class="form-group">
+                <label for="login-password">Senha</label>
 
-              <span class="card-icon"> ↓ </span>
-            </div>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Digite sua senha"
+                  required
+                />
+              </div>
 
-            <p class="card-value" id="expense-display">R$ 0,00</p>
-          </article>
+              <button type="submit" class="submit-button">Entrar</button>
 
-          <article class="summary-card balance-card">
-            <div class="card-header">
-              <h2 class="card-title">Saldo Total</h2>
-
-              <span class="card-icon"> $ </span>
-            </div>
-
-            <p class="card-value" id="balance-display">R$ 0,00</p>
-          </article>
+              <p id="login-message"></p>
+            </form>
+          </div>
         </section>
 
-        <section class="dashboard-content">
-          <section class="form-section" aria-label="Cadastro de transações">
-            <div class="section-header">
-              <h2 class="section-title">Nova Transação</h2>
+        <!-- DASHBOARD -->
+        <section id="dashboard-section">
+          <section class="summary-section" aria-label="Resumo financeiro">
+            <article class="summary-card income-card">
+              <div class="card-header">
+                <h2 class="card-title">Entradas</h2>
 
-              <p class="section-description">
-                Adicione uma nova receita ou despesa
-              </p>
-            </div>
-
-            <form id="transaction-form" class="transaction-form">
-              <div class="form-group">
-                <label for="transaction-name"> Descrição </label>
-
-                <input
-                  type="text"
-                  id="transaction-name"
-                  name="transaction-name"
-                  placeholder="Ex: Pagamento, refeição ..."
-                  autocomplete="off"
-                />
-                <div id="form-message" class="form-message"></div>
+                <span class="card-icon"> ↑ </span>
               </div>
 
-              <div class="form-group">
-                <label for="transaction-amount"> Valor </label>
+              <p class="card-value" id="income-display">R$ 0,00</p>
+            </article>
 
-                <input
-                  type="number"
-                  id="transaction-amount"
-                  name="transaction-amount"
-                  step="0.01"
-                  placeholder="Ex: 10 ou -10 (use - para saídas)"
-                />
+            <article class="summary-card expense-card">
+              <div class="card-header">
+                <h2 class="card-title">Saídas</h2>
+
+                <span class="card-icon"> ↓ </span>
               </div>
 
-              <button type="submit" class="submit-button">
-                Adicionar Transação
-              </button>
-            </form>
+              <p class="card-value" id="expense-display">R$ 0,00</p>
+            </article>
+
+            <article class="summary-card balance-card">
+              <div class="card-header">
+                <h2 class="card-title">Saldo Total</h2>
+
+                <span class="card-icon"> $ </span>
+              </div>
+
+              <p class="card-value" id="balance-display">R$ 0,00</p>
+            </article>
           </section>
 
-          <section
-            class="transactions-section"
-            aria-label="Histórico de transações"
-          >
-            <div class="section-header">
-              <h2 class="section-title">Extrato Financeiro</h2>
+          <section class="dashboard-content">
+            <section class="form-section" aria-label="Cadastro de transações">
+              <div class="section-header">
+                <h2 class="section-title">Nova Transação</h2>
 
-              <p class="section-description">
-                Histórico completo de movimentações
-              </p>
-            </div>
+                <p class="section-description">
+                  Adicione uma nova receita ou despesa
+                </p>
+              </div>
 
-            <ul id="transaction-list" class="transaction-list">
-              <li class="empty-state">Nenhuma transação cadastrada.</li>
-            </ul>
+              <form id="transaction-form" class="transaction-form">
+                <div class="form-group">
+                  <label for="transaction-name">Descrição</label>
+
+                  <input
+                    type="text"
+                    id="transaction-name"
+                    name="transaction-name"
+                    placeholder="Ex: Pagamento, refeição ..."
+                    autocomplete="off"
+                  />
+
+                  <div id="form-message" class="form-message"></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="transaction-amount">Valor</label>
+
+                  <input
+                    type="number"
+                    id="transaction-amount"
+                    name="transaction-amount"
+                    step="0.01"
+                    placeholder="Ex: 10 ou -10 (use - para saídas)"
+                  />
+                </div>
+
+                <button type="submit" class="submit-button">
+                  Adicionar Transação
+                </button>
+              </form>
+            </section>
+
+            <section
+              class="transactions-section"
+              aria-label="Histórico de transações"
+            >
+              <div class="section-header">
+                <h2 class="section-title">Extrato Financeiro</h2>
+
+                <p class="section-description">
+                  Histórico completo de movimentações
+                </p>
+              </div>
+
+              <ul id="transaction-list" class="transaction-list">
+                <li class="empty-state">Nenhuma transação cadastrada.</li>
+              </ul>
+            </section>
           </section>
         </section>
       </div>
@@ -138,8 +177,9 @@
     </footer>
 
     <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="script.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+<script src="script.js"></script>
     <!--<script src="script.js" defer></script>-->
   </body>
 </html>
