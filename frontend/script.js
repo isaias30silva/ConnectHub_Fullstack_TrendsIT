@@ -297,8 +297,7 @@ function clearFormInputs() {
 
   editingTransactionId = null;
 
-  transactionSubmitButton.textContent =
-  "Adicionar Transação";
+  transactionSubmitButton.textContent = "Adicionar Transação";
 
   clearInputErrors();
 
@@ -387,8 +386,7 @@ async function handleFormSubmit(event) {
 
     editingTransactionId = null;
 
-    transactionSubmitButton.textContent =
-  "Adicionar Transação";
+    transactionSubmitButton.textContent = "Adicionar Transação";
   } else {
     const newTransaction = createTransaction(
       transactionName,

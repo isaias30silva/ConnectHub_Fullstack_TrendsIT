@@ -67,7 +67,69 @@
 
               <button type="submit" class="submit-button">Entrar</button>
 
+              <button
+                type="button"
+                id="show-register-button"
+                class="secondary-button"
+              >
+                Criar cadastro
+              </button>
+
               <p id="login-message"></p>
+            </form>
+          </div>
+        </section>
+
+        <!-- Cadastro -->
+        <section id="register-section">
+          <div class="login-card">
+            <h2>Criar conta</h2>
+
+            <form id="register-form">
+              <div class="form-group">
+                <label for="register-name"> Nome </label>
+
+                <input
+                  type="text"
+                  id="register-name"
+                  placeholder="Digite seu nome"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="register-email"> E-mail </label>
+
+                <input
+                  type="email"
+                  id="register-email"
+                  placeholder="Digite seu e-mail"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="register-password"> Senha </label>
+
+                <input
+                  type="password"
+                  id="register-password"
+                  placeholder="Digite sua senha"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="submit-button">Criar Conta</button>
+
+              <p id="register-message"></p>
+
+              <button
+                type="button"
+                id="back-login-button"
+                class="secondary-button"
+              >
+                Voltar para Login
+              </button>
             </form>
           </div>
         </section>
