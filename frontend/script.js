@@ -6,7 +6,6 @@ const transactionList = document.querySelector("#transaction-list");
 const incomeDisplay = document.querySelector("#income-display");
 const expenseDisplay = document.querySelector("#expense-display");
 const balanceDisplay = document.querySelector("#balance-display");
-const LOCAL_STORAGE_KEY = "smartcash:transactions";
 
 let transactions = [];
 
@@ -108,16 +107,22 @@ function saveTransactions() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(transactions));
 }
 
-function loadTransactions() {
-  const storedTransactions = localStorage.getItem(LOCAL_STORAGE_KEY);
+async function loadTransactions() {
+  try {
+    const data = await apiRequest("/transactions");
 
-  if (!storedTransactions) {
-    return;
+    transactions = data.map((transaction) => ({
+      id: transaction.id,
+      name: transaction.description,
+      amount: Number(transaction.amount),
+    }));
+
+    updateUI();
+  } catch (error) {
+    console.error(error);
+
+    showFormMessage("Erro ao carregar transações.", "error");
   }
-
-  transactions = JSON.parse(storedTransactions);
-
-  updateUI();
 }
 
 function initializeApplication() {
