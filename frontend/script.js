@@ -68,10 +68,32 @@ function createTransaction(name, amount) {
   };
 }
 
-function addTransaction(transaction) {
-  transactions.push(transaction);
+async function addTransaction(transaction) {
+  try {
+    const createdTransaction = await apiRequest("/transactions", {
+      method: "POST",
+      body: JSON.stringify({
+        description: transaction.name,
+        amount: transaction.amount,
+      }),
+    });
 
-  saveTransactions();
+    transactions.push({
+      id: createdTransaction.id,
+      name: createdTransaction.description,
+      amount: Number(createdTransaction.amount),
+    });
+
+    updateUI();
+
+    return true;
+  } catch (error) {
+    console.error(error);
+
+    showFormMessage("Erro ao salvar transação.", "error");
+
+    return false;
+  }
 }
 
 function removeTransaction(transactionId) {
@@ -255,7 +277,7 @@ function clearFormInputs() {
   transactionNameInput.focus();
 }
 
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
   event.preventDefault();
 
   const transactionName = transactionNameInput.value;
@@ -270,11 +292,13 @@ function handleFormSubmit(event) {
 
   const newTransaction = createTransaction(transactionName, transactionAmount);
 
-  addTransaction(newTransaction);
+  const success = await addTransaction(newTransaction);
+
+  if (!success) {
+    return;
+  }
 
   showFormMessage("Transação adicionada com sucesso.", "success");
-
-  updateUI();
 
   clearFormInputs();
 }
