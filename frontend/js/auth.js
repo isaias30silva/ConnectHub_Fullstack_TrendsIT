@@ -58,3 +58,9 @@ if (loginForm) {
     loginMessage.textContent = result.message;
   });
 }
+
+const logoutButton = document.querySelector("#logout-button");
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", logout);
+}

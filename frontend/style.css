@@ -455,6 +455,37 @@ body {
   box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
 }
 
+.logout-button {
+  background: transparent;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+
+  padding: 0.6rem 1.2rem;
+
+  border-radius: 8px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
 #login-section,
 #dashboard-section {
   display: none;
@@ -482,6 +513,15 @@ body {
 
   .card-value {
     font-size: 1.75rem;
+  }
+
+  .header-content {
+    gap: 1rem;
+  }
+
+  .logout-button {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
