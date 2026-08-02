@@ -21,6 +21,29 @@ async function login(email, password) {
   }
 }
 
+async function register(name, email, password) {
+  try {
+    const response = await apiRequest("/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
+
+    return {
+      success: true,
+      data: response,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+}
+
 function logout() {
   localStorage.removeItem("token");
 
@@ -29,6 +52,48 @@ function logout() {
 
 function isAuthenticated() {
   return Boolean(localStorage.getItem("token"));
+}
+
+function validateName(name) {
+  if (name.trim() === "") {
+    return "O nome é obrigatório.";
+  }
+
+  if (name.trim().length < 3) {
+    return "O nome deve possuir pelo menos 3 caracteres.";
+  }
+
+  return null;
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    return "Informe um e-mail válido.";
+  }
+
+  return null;
+}
+
+function validatePassword(password) {
+  if (password.length < 6) {
+    return "A senha deve possuir pelo menos 6 caracteres.";
+  }
+
+  return null;
+}
+
+function showMessage(element, message, type) {
+  element.textContent = message;
+
+  element.style.display = "block";
+
+  element.classList.remove("message-success", "message-error");
+
+  element.classList.add(
+    type === "success" ? "message-success" : "message-error",
+  );
 }
 
 const loginForm = document.querySelector("#login-form");
@@ -43,19 +108,19 @@ if (loginForm) {
 
     const loginMessage = document.querySelector("#login-message");
 
-    loginMessage.textContent = "Autenticando...";
+    showMessage(loginMessage, "Autenticando...", "success");
 
     const result = await login(email, password);
 
     if (result.success) {
-      loginMessage.textContent = "Login realizado com sucesso!";
+      showMessage(loginMessage, "Login realizado com sucesso!", "success");
 
       window.location.reload();
 
       return;
     }
 
-    loginMessage.textContent = result.message;
+    showMessage(loginMessage, result.message, "error");
   });
 }
 
@@ -93,12 +158,33 @@ if (registerForm) {
 
     const message = document.querySelector("#register-message");
 
-    message.textContent = "Criando conta...";
+    const nameError = validateName(name);
+
+    if (nameError) {
+      showMessage(message, nameError, "error");
+      return;
+    }
+
+    const emailError = validateEmail(email);
+
+    if (emailError) {
+      showMessage(message, emailError, "error");
+      return;
+    }
+
+    const passwordError = validatePassword(password);
+
+    if (passwordError) {
+      showMessage(message, passwordError, "error");
+      return;
+    }
+
+    showMessage(message, "Criando conta...", "success");
 
     const result = await register(name, email, password);
 
     if (result.success) {
-      message.textContent = "Conta criada com sucesso!";
+      showMessage(message, "Conta criada com sucesso!", "success");
 
       setTimeout(() => {
         window.location.reload();
@@ -107,7 +193,7 @@ if (registerForm) {
       return;
     }
 
-    message.textContent = result.message;
+    showMessage(message, result.message, "error");
   });
 }
 
