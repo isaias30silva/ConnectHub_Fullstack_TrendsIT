@@ -50,7 +50,7 @@ body {
 
   border-bottom: 1px solid var(--border-color);
 
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 
   box-shadow: var(--shadow-sm);
 }
@@ -506,6 +506,36 @@ body {
   border-color: var(--expense-color) !important;
 
   box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+}
+
+.user-info {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  margin-right: 1rem;
+
+  color: #ffffff;
+}
+
+.user-info p {
+  margin: 0;
+
+  line-height: 1.4;
+}
+
+#user-name {
+  font-size: 1rem;
+
+  font-weight: 600;
+}
+
+#user-email {
+  font-size: 0.85rem;
+
+  color: #d1d5db;
 }
 
 .logout-button {

@@ -149,6 +149,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (tokenIsValid) {
     dashboardSection.style.display = "block";
 
+    const user = await getCurrentUser();
+
+    if (user) {
+      document.querySelector("#user-name").textContent = `Olá, ${user.name}!`;
+
+      document.querySelector("#user-email").textContent = user.email;
+    }
+
     await initializeApplication();
   } else {
     loginSection.style.display = "block";
@@ -239,5 +247,15 @@ async function validateToken() {
     localStorage.removeItem("token");
 
     return false;
+  }
+}
+
+async function getCurrentUser() {
+  try {
+    return await apiRequest("/users/me");
+  } catch (error) {
+    console.error(error);
+
+    return null;
   }
 }
