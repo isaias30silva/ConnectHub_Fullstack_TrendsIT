@@ -159,10 +159,6 @@ async function loadTransactions() {
 }
 
 async function initializeApplication() {
-  if (!isAuthenticated()) {
-    return;
-  }
-
   await loadTransactions();
 }
 
@@ -191,12 +187,12 @@ function createTransactionElement(transaction) {
             </span>
 
             <button
- class="edit-button"
- data-id="${transaction.id}"
- aria-label="Editar transação"
->
-✏️
-</button>
+              class="edit-button"
+              data-id="${transaction.id}"
+              aria-label="Editar transação"
+            >
+              ✏️
+            </button>
 
             <button
                 class="delete-button"
@@ -436,5 +432,3 @@ transactionAmountInput.addEventListener("input", () => {
 });
 
 transactionForm.addEventListener("submit", handleFormSubmit);
-
-initializeApplication();

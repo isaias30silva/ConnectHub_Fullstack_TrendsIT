@@ -130,15 +130,26 @@ if (logoutButton) {
   logoutButton.addEventListener("click", logout);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const loginSection = document.querySelector("#login-section");
 
   const registerSection = document.querySelector("#register-section");
 
   const dashboardSection = document.querySelector("#dashboard-section");
 
-  if (isAuthenticated()) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    loginSection.style.display = "block";
+    return;
+  }
+
+  const tokenIsValid = await validateToken();
+
+  if (tokenIsValid) {
     dashboardSection.style.display = "block";
+
+    await initializeApplication();
   } else {
     loginSection.style.display = "block";
   }
@@ -215,4 +226,18 @@ if (backLoginButton) {
 
     document.querySelector("#login-section").style.display = "block";
   });
+}
+
+async function validateToken() {
+  try {
+    await apiRequest("/users/me");
+
+    return true;
+  } catch (error) {
+    console.error("Token inválido:", error);
+
+    localStorage.removeItem("token");
+
+    return false;
+  }
 }
