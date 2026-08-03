@@ -53,10 +53,13 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 - JWT
 - bcryptjs
 - Variáveis de ambiente (.env)
+-
 
----
+### Deployment
 
-## 🚀 Deployment
+- Frontend: Vercel
+- Backend: Render
+- Banco de Dados: Neon
 
 ---
 
