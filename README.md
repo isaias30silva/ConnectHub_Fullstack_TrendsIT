@@ -8,9 +8,9 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 
 ## 🌐 Acesse o Projeto
 
-🔗 Frontend: 
+🔗 Frontend:
 
-🔗 Backend/API: 
+🔗 Backend/API:
 
 ---
 
@@ -35,19 +35,23 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 ## 🚀 Tecnologias Utilizadas
 
 ### Frontend
+
 - HTML5
 - CSS3
 - JavaScript Vanilla
 
 ### Backend
+
 - Node.js
 - Express.js
 
 ### Banco de Dados
+
 - MySQL
 - Sequelize ORM
 
 ### Segurança
+
 - JWT
 - bcryptjs
 - Variáveis de ambiente (.env)
@@ -57,6 +61,7 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 ## 📱 Funcionalidades
 
 ### 👤 Autenticação
+
 - Cadastro de usuários
 - Login
 - Logout
@@ -64,12 +69,14 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 - Proteção de rotas
 
 ### 💰 Gestão Financeira
+
 - Criar transações
 - Listar transações
 - Editar transações
 - Excluir transações
 
 ### 📊 Dashboard
+
 - Total de receitas
 - Total de despesas
 - Saldo atualizado automaticamente
@@ -135,15 +142,15 @@ Atualização do dashboard
 
 ## 📊 Operações Disponíveis
 
-| Operação | Status |
-|----------|---------|
-| Cadastro de Usuário | ✅ |
-| Login | ✅ |
-| Logout | ✅ |
-| Create | ✅ |
-| Read | ✅ |
-| Update | ✅ |
-| Delete | ✅ |
+| Operação            | Status |
+| ------------------- | ------ |
+| Cadastro de Usuário | ✅     |
+| Login               | ✅     |
+| Logout              | ✅     |
+| Create              | ✅     |
+| Read                | ✅     |
+| Update              | ✅     |
+| Delete              | ✅     |
 
 ---
 
@@ -259,15 +266,7 @@ Live Server
 
 ## 👀 Preview
 
-Adicione uma imagem:
-
-```text
-frontend/assets/images/preview.png
-```
-
-```md
 ![Preview](./frontend/assets/images/preview.png)
-```
 
 ---
 
