@@ -62,7 +62,7 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 
 ## 📱 Funcionalidades
 
-- Frontend: Vercel
+- Frontend: Verce
 - Backend: Render
 - Banco de Dados: Neon
 
