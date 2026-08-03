@@ -45,7 +45,7 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 
 ### Banco de Dados
 
-- MySQL
+- PostgreSQL 
 - Sequelize ORM
 
 ### Segurança
@@ -53,7 +53,6 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 - JWT
 - bcryptjs
 - Variáveis de ambiente (.env)
--
 
 ### Deployment
 
