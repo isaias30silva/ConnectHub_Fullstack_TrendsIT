@@ -191,10 +191,13 @@ Compatível com:
 - APIs REST
 - JWT
 - Sequelize
-- MySQL
+- PostgreSQL/ Banco de Dados Relacional
 - Arquitetura MVC
 - CRUD completo
 - Integração Frontend + Backend
+- Deployment e configuração de variáveis de ambiente
+- Arquitetura de DB em nuvem
+- Plataformas de hospedagem de aplicações, como Render, Vercel e Neon
 
 ---
 
