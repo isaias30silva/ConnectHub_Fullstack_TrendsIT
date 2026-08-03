@@ -73,6 +73,24 @@ function createTransaction(name, amount) {
   };
 }
 
+async function loadTransactions() {
+  try {
+    const data = await apiRequest("/transactions");
+
+    transactions = data.map((transaction) => ({
+      id: transaction.id,
+      name: transaction.description,
+      amount: Number(transaction.amount),
+    }));
+
+    updateUI();
+  } catch (error) {
+    console.error(error);
+
+    showFormMessage("Erro ao carregar transações.", "error");
+  }
+}
+
 async function addTransaction(transaction) {
   try {
     const createdTransaction = await apiRequest("/transactions", {
@@ -138,24 +156,6 @@ function calculateBalance() {
     (total, transaction) => total + transaction.amount,
     0,
   );
-}
-
-async function loadTransactions() {
-  try {
-    const data = await apiRequest("/transactions");
-
-    transactions = data.map((transaction) => ({
-      id: transaction.id,
-      name: transaction.description,
-      amount: Number(transaction.amount),
-    }));
-
-    updateUI();
-  } catch (error) {
-    console.error(error);
-
-    showFormMessage("Erro ao carregar transações.", "error");
-  }
 }
 
 async function initializeApplication() {

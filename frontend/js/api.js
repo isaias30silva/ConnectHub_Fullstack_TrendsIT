@@ -4,11 +4,10 @@ async function apiRequest(endpoint, options = {}) {
   const token = localStorage.getItem("token");
 
   const config = {
-    ...options,
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
     },
+    ...options,
   };
 
   if (token) {
@@ -17,21 +16,15 @@ async function apiRequest(endpoint, options = {}) {
 
   const response = await fetch(`${API_URL}${endpoint}`, config);
 
-  let data;
+  const data = await response.json();
 
-  try {
-    data = await response.json();
-  } catch {
-    data = {};
-  }
+  if (response.status === 401 && endpoint !== "/auth/login") {
+  localStorage.removeItem("token");
 
-  if (response.status === 401) {
-    localStorage.removeItem("token");
+  window.location.reload();
 
-    window.location.reload();
-
-    throw new Error("Sessão expirada.");
-  }
+  throw new Error("Sessão expirada. Faça login novamente.");
+}
 
   if (!response.ok) {
     throw new Error(data.message || "Erro na requisição");

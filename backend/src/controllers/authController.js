@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { User } = require("../../models");
@@ -57,14 +56,12 @@ async function login(req, res, next) {
 
     if (!user) {
       return res.status(401).json({
-        message: "Credenciais inválidas",
+        message:
+          "E-mail ou senha incorretos. Verifique seus dados ou crie uma conta caso ainda não possua cadastro.",
       });
     }
 
-    const passwordIsValid = await bcrypt.compare(
-      password,
-      user.password,
-    );
+    const passwordIsValid = await bcrypt.compare(password, user.password);
 
     if (!passwordIsValid) {
       return res.status(401).json({

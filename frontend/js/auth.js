@@ -102,10 +102,6 @@ async function validateToken() {
 
     return true;
   } catch (error) {
-    console.error("Token inválido:", error);
-
-    localStorage.removeItem("token");
-
     return false;
   }
 }
