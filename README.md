@@ -8,9 +8,7 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 
 ## 🌐 Acesse o Projeto
 
-🔗 Frontend:
-
-🔗 Backend/API:
+🔗 https://connect-hub-fullstack-trends-it.vercel.app/
 
 ---
 
@@ -58,7 +56,15 @@ O projeto simula uma solução real de mercado para gerenciamento financeiro, co
 
 ---
 
+## 🚀 Deployment
+
+---
+
 ## 📱 Funcionalidades
+
+- Frontend: Vercel
+- Backend: Render
+- Banco de Dados: Neon
 
 ### 👤 Autenticação
 
